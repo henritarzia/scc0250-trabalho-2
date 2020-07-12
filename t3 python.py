@@ -73,7 +73,7 @@ fragment_code = """
             // calculando reflexao difusa
             vec3 norm1 = normalize(out_normal); // normaliza vetores perpendiculares
             if (invert_normal)
-                norm1 *= -1
+                norm1 = -norm1;
             vec3 lightDir1 = normalize(lightPos1 - out_fragPos); // direcao da luz
             float diff1 = max(dot(norm1, lightDir1), 0.0); // verifica limite angular (entre 0 e 90)
             vec3 diffuse1 = kd * il1 * diff1 * lightColor; // iluminacao difusa
@@ -91,6 +91,8 @@ fragment_code = """
             
             // calculando reflexao difusa
             vec3 norm2 = normalize(out_normal); // normaliza vetores perpendiculares
+            if (invert_normal)
+                norm2 = -norm2;
             vec3 lightDir2 = normalize(lightPos2 - out_fragPos); // direcao da luz
             float diff2 = max(dot(norm2, lightDir2), 0.0); // verifica limite angular (entre 0 e 90)
             vec3 diffuse2 = kd * diff2 * lightColor; // iluminacao difusa
@@ -358,7 +360,7 @@ loc_normals_coord = glGetAttribLocation(program, "normals")
 glEnableVertexAttribArray(loc_normals_coord)
 glVertexAttribPointer(loc_normals_coord, 3, GL_FLOAT, False, stride, offset)
 
-def desenha_objeto(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0, kd = 1, ks = 1, ns = 4096):
+def desenha_objeto(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0, kd = 1, ks = 1, ns = 4096, invert_normal = False):
     mat_model = model(angle, *rotation, *translation, *scale)
     loc_model = glGetUniformLocation(program, "model")
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
@@ -368,14 +370,16 @@ def desenha_objeto(vi, qtd, texture_id, angle, rotation, translation, scale, ka 
     loc_kd = glGetUniformLocation(program, "kd")
     glUniform1f(loc_kd, kd)   
     loc_ks = glGetUniformLocation(program, "ks")
-    glUniform1f(loc_ks, ks)       
+    glUniform1f(loc_ks, ks)
     loc_ns = glGetUniformLocation(program, "ns")
-    glUniform1f(loc_ns, ns)       
+    glUniform1f(loc_ns, ns)
+    loc_invert_normal = glGetUniformLocation(program, "invert_normal")
+    glUniform1f(loc_invert_normal, invert_normal)
 
     glBindTexture(GL_TEXTURE_2D, texture_id)
     glDrawArrays(GL_TRIANGLES, vi, qtd)
 
-def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0, kd = 1, ks = 0, ns = 1):
+def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0, kd = 1, ks = 0, ns = 1, invert_normal = True):
     mat_model = model(angle, *rotation, *translation, *scale)
     loc_model = glGetUniformLocation(program, "model")
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
@@ -388,6 +392,8 @@ def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 
     glUniform1f(loc_ks, ks)
     loc_ns = glGetUniformLocation(program, "ns")
     glUniform1f(loc_ns, ns)
+    loc_invert_normal = glGetUniformLocation(program, "invert_normal")
+    glUniform1f(loc_invert_normal, invert_normal)
 
     loc_light_pos = glGetUniformLocation(program, "lightPos1")
     glUniform3f(loc_light_pos, *translation)
@@ -395,7 +401,7 @@ def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 
     glBindTexture(GL_TEXTURE_2D, texture_id)
     glDrawArrays(GL_TRIANGLES, vi, qtd)
     
-def desenha_luz2(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 1, kd = 0, ks = 0, ns = 1):
+def desenha_luz2(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 1, kd = 0, ks = 0, ns = 1, invert_normal = True):
     mat_model = model(angle, *rotation, *translation, *scale)
     loc_model = glGetUniformLocation(program, "model")
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
@@ -408,6 +414,8 @@ def desenha_luz2(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 
     glUniform1f(loc_ks, ks)
     loc_ns = glGetUniformLocation(program, "ns")
     glUniform1f(loc_ns, ns)
+    loc_invert_normal = glGetUniformLocation(program, "invert_normal")
+    glUniform1f(loc_invert_normal, invert_normal)
 
     nova_coordenada_luz = glm.mat4(1.0)
     nova_coordenada_luz = glm.rotate(nova_coordenada_luz, math.radians(angle), glm.vec3(*rotation))
@@ -464,7 +472,7 @@ def desenha_chaleira():
     # desenha o modelo
     glDrawArrays(GL_TRIANGLES, 108, 415668-108) ## renderizando
 
-cameraPos   = glm.vec3(0.0,  0.0,  0.0);
+cameraPos   = glm.vec3(0.0,  1.0,  0.0);
 cameraFront = glm.vec3(0.0,  0.0, -1.0);
 cameraUp    = glm.vec3(0.0,  1.0,  0.0);
 
