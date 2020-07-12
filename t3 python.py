@@ -1,3 +1,9 @@
+# Trabalho Prático 3
+
+# Alunos:
+# Henrique Tadashi Tarzia - 10692210
+# Luis Felipe Ribeiro Chaves - 10801221
+
 import glfw
 from OpenGL.GL import *
 import OpenGL.GL.shaders
@@ -253,31 +259,31 @@ vi_sky, qtd_sky, id_sky = insert_model('modelos/sky/cubo.obj','modelos/sky/sky_m
 
 angle_grass = 0.0
 r_grass = (0.0, 1.0, 0.0)
-s_grass = (1.0, 1.0, 1.0)
-t_grass = (0.0, 0.0, 0.0)
+t_grass = (0.0, -1.0, -12.0)
+s_grass = (27.0, 27.0, 27.0)
 vi_grass, qtd_grass, id_grass = insert_model('modelos/terrain/terrain.obj','modelos/terrain/grass.jpg')
 
 #---------TERRAIN (STREET)----------#
 
 angle_street = 0.0
 r_street = (0.0, 1.0, 0.0)
-s_street = (1.0, 1.0, 1.0)
-t_street = (0.0, 0.0, 0.0)
+t_street = (0.0, -1.0, 20.0)
+s_street = (28.0, 1.0, 5.0)
 vi_street, qtd_street, id_street = insert_model('modelos/terrain/terrain-02.obj','modelos/terrain/street.jpg')
 
 #-------------BIRDBATH-------------#
 
 angle_birdbath = 0.0
 r_birdbath = (0.0, 1.0, 0.0)
-s_birdbath = (1.0, 1.0, 1.0)
-t_birdbath = (0.0, 0.0, 0.0)
+t_birdbath = (8.0, -1.0, 0.0)
+s_birdbath = (2.0,2.0,2.0)
 vi_birdbath, qtd_birdbath, id_birdbath = insert_model('modelos/birdbath/birdbath.obj','modelos/birdbath/birdbath.jpg')
 
 #-------------MUSEUM-------------#
 
 angle_museum = 0.0
 r_museum = (0.0, 1.0, 0.0)
-t_museum = (0.0, 0.0, 0.0)
+t_museum = (-5.0, 0.7, 0.0)
 s_museum = (0.1, 0.1, 0.1)
 vi_museum, qtd_museum, id_museum = insert_model('modelos/museum/museum.obj','modelos/museum/museum.jpeg')
 
@@ -285,32 +291,104 @@ vi_museum, qtd_museum, id_museum = insert_model('modelos/museum/museum.obj','mod
 
 angle_floor_m = 0.0
 r_floor_m = (0.0, 1.0, 0.0)
-t_floor_m = (0.0, 0.0, 0.0)
-s_floor_m = (1.0, 1.0, 1.0)
+t_floor_m = (-5.0, -0.55, 0.0)
+s_floor_m = (6.25,1,3.9)
 vi_floor_m, qtd_floor_m, id_floor_m = insert_model('modelos/floor/floor.obj','modelos/floor/brick_hexagonal.png')
 
-#-------TABLE-------#
+#------------TABLE-----------#
 
 angle_table = 0.0
 r_table = (0.0, 0.0, 1.0)
-t_table = (0.0, 0.0, 0.0)
+t_table = (0.8,-0.55,0.5)
 s_table = (1.0, 1.0, 1.0)
 vi_table, qtd_table, id_table = insert_model('modelos/table/table.obj','modelos/table/table.png')
 
-#-------------DUCK-------------#
+#------------DUCK------------#
 
 angle_duck = 0.0
 r_duck = (0.0, 1.0, 0.0)
-t_duck = (0.0, 0.0, 0.0)
-s_duck = (1.0, 1.0, 1.0)
+t_duck = (-5.0,0.1, 0.0)
+s_duck = (0.28,0.28,0.28)
 vi_duck, qtd_duck, id_duck = insert_model('modelos/duck/duck.obj','modelos/duck/duck.png')
+
+#-----------PAINT #1----------#
+
+angle_paint_1 = 0.0
+r_paint_1 = (0.0,1.0,0.0)
+t_paint_1 = (-2.0,1.5,-3.7)
+s_paint_1 = (0.2,0.2,0.2)     
+vi_paint_1, qtd_paint_1, id_paint_1 = insert_model('modelos/paints/paint-01.obj','modelos/paints/paint-01.jpg')
+
+#-----------PAINT #2----------#
+
+angle_paint_2 = 0.0
+r_paint_2 = (0.0,1.0,0.0)
+t_paint_2 = (-0.5,1.0,-3.7)
+s_paint_2 = (0.15,0.15,0.15)
+vi_paint_2, qtd_paint_2, id_paint_2 = insert_model('modelos/paints/paint-02.obj','modelos/paints/paint-02.jpg')
+
+#-------------SEEDS-------------#
+
+angle_seeds = 0.0
+r_seeds = (0.0,1.0, 0.0)
+t_seeds = (4.0,-1.0,-2.0)
+s_seeds = (12.0,12.0,12.0)
+vi_seeds, qtd_seeds, id_seeds = insert_model('modelos/seeds/seeds.obj','modelos/seeds/seeds.png')
+
+#-------------APPLES-------------#
+
+angle_apple = (10.0,0.0,15.0)
+r_apple = ([1.0,0.0,1.0],[0.0,0.0,1.0],[0.0,0.0,1.0])                                                                 
+t_apple = ([3.6,-1.4,0.2],[4.2,-1.0,-0.2],[3.6,-2.0,-0.5])
+s_apple = ([4.0,4.0,4.0],[4.0,4.0,4.0],[4.0,4.0,4.0])
+vi_apple, qtd_apple, id_apple = insert_model('modelos/apple/apple.obj','modelos/apple/apple.png') 
+
+#-------------CAMPFIRE-------------#
+
+angle_campfire = 0.0
+r_campfire = (0.0,1.0,0.0)
+t_campfire = (8.0,-1.0,7.0)
+s_campfire = (0.02,0.02,0.02)                                                                                                                                                                                      # expoente de reflexao especular
+vi_campfire, qtd_campfire, id_campfire = insert_model('modelos/campfire/campfire.obj','modelos/campfire/campfire.png') 
+
+#------MATERNIDADE SCULPTURE------#
+
+angle_maternidade = 0.0
+r_maternidade = (0.0,1.0,0.0)
+t_maternidade = (-8.0,-0.7,-2.6)
+s_maternidade = (1.0,1.0,1.0)
+vi_maternidade, qtd_maternidade, id_maternidade = insert_model('modelos/maternidade_sculpture/maternidade_modified.obj','modelos/maternidade_sculpture/maternidade.jpg')
+
+#-------ALLEGORIE SCULPTURE-------#
+
+angle_allegorie = 0.0
+r_allegorie = (0.0,1.0,0.0)
+t_allegorie = (0.8,-1.0,-1.5)
+s_allegorie = (0.1,0.1,0.1)
+vi_allegorie, qtd_allegorie, id_allegorie = insert_model('modelos/allegorie_sculpture/Allegorie_modifiedobj.obj','modelos/allegorie_sculpture/allegorie.png')
+
+#-------------HACHIROKU-------------#
+
+angle_car = 0.0
+r_car = (0.0, 1.0, 0.0)
+t_car = (-16.0, -1.0, 16.2)
+s_car = (1.2,1.2,1.2)
+vi_car, qtd_car, id_car = insert_model('modelos/hachiroku/hachiroku.obj','modelos/hachiroku/hachiroku.jpg')
+
+#-------------BOOTH-------------#
+
+angle_booth = 0.0
+r_booth = (0.0, 0.0, 1.0)
+t_booth = (-16.0, -1.0, 12.0)
+s_booth = (2.0,2.0,2.0)
+vi_booth, qtd_booth, id_booth = insert_model('modelos/booth/booth.obj','modelos/booth/booth.jpg')
 
 #-------POKEBALL-------#
 
 angle_pokeball = 0.0
 r_pokeball = (0.0, 1.0, 0.0)
-t_pokeball = (0.0, 20.0, 0.0)
-s_pokeball = (1.0, 1.0, 1.0)
+t_pokeball = (0.8,0.5,0.5)
+s_pokeball = (0.03,0.03,0.03)
 vi_pokeball, qtd_pokeball, id_pokeball = insert_model('modelos/table/pokeball.obj','modelos/table/pokeball.png')
 
 #-------------SUN-------------#
@@ -360,7 +438,7 @@ loc_normals_coord = glGetAttribLocation(program, "normals")
 glEnableVertexAttribArray(loc_normals_coord)
 glVertexAttribPointer(loc_normals_coord, 3, GL_FLOAT, False, stride, offset)
 
-def desenha_objeto(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0, kd = 1, ks = 1, ns = 4096, invert_normal = False):
+def desenha_objeto(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 1, kd = 1, ks = 1, ns = 4096, invert_normal = False):
     mat_model = model(angle, *rotation, *translation, *scale)
     loc_model = glGetUniformLocation(program, "model")
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
@@ -427,51 +505,6 @@ def desenha_luz2(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 
     glBindTexture(GL_TEXTURE_2D, texture_id)
     glDrawArrays(GL_TRIANGLES, vi, qtd)
 
-def desenha_chaleira():
-    
-
-    # aplica a matriz model
-    angle = 0.0
-    
-    r_x = 0.0; r_y = 1.0; r_z = 0.0;
-    
-    # translacao
-    t_x = 0.0; t_y = 0.0; t_z = 0.0;
-    
-    # escala
-    s_x = 0.1; s_y = 0.1; s_z = 0.1;
-    
-    mat_model = model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z)
-    loc_model = glGetUniformLocation(program, "model")
-    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
-       
-    
-    #### define parametros de ilumincao do modelo
-    ka = 0.5 # coeficiente de reflexao ambiente do modelo
-    kd = 0.5 # coeficiente de reflexao difusa do modelo
-    ks = 0.5 # coeficiente de reflexao especular do modelo
-    ns = 32.0 # expoente de reflexao especular
-    
-    loc_ka = glGetUniformLocation(program, "ka") # recuperando localizacao da variavel ka na GPU
-    glUniform1f(loc_ka, ka) ### envia ka pra gpu
-    
-    loc_kd = glGetUniformLocation(program, "kd") # recuperando localizacao da variavel kd na GPU
-    glUniform1f(loc_kd, kd) ### envia kd pra gpu    
-    
-    loc_ks = glGetUniformLocation(program, "ks") # recuperando localizacao da variavel ks na GPU
-    glUniform1f(loc_ks, ks) ### envia ks pra gpu        
-    
-    loc_ns = glGetUniformLocation(program, "ns") # recuperando localizacao da variavel ns na GPU
-    glUniform1f(loc_ns, ns) ### envia ns pra gpu        
-
-    
-    #define id da textura do modelo
-    glBindTexture(GL_TEXTURE_2D, 3)
-    
-    
-    # desenha o modelo
-    glDrawArrays(GL_TRIANGLES, 108, 415668-108) ## renderizando
-
 cameraPos   = glm.vec3(0.0,  1.0,  0.0);
 cameraFront = glm.vec3(0.0,  0.0, -1.0);
 cameraUp    = glm.vec3(0.0,  1.0,  0.0);
@@ -498,10 +531,11 @@ def key_event(window,key,scancode,action,mods):
     if key == 68 and (action==1 or action==2): # tecla D
         cameraPos += glm.normalize(glm.cross(cameraFront, cameraUp)) * cameraSpeed
         
-    # if key == 80 and action==1 and polygonal_mode==True:
-    #     polygonal_mode=False
-    # elif key == 80 and action==1 and polygonal_mode==False:
-    #         polygonal_mode=True
+    if key == 79 and action==1 and polygonal_mode==True:
+        polygonal_mode=False
+    else:
+        if key == 79 and action==1 and polygonal_mode==False:
+            polygonal_mode=True
     
     if key == 76 and (action==1 or action==2): # tecla L
         internalLight = not internalLight
@@ -542,7 +576,6 @@ def mouse_event(window, xpos, ypos):
     yaw += xoffset;
     pitch += yoffset;
 
-    
     if pitch >= 90.0: pitch = 90.0
     if pitch <= -90.0: pitch = -90.0
 
@@ -551,8 +584,6 @@ def mouse_event(window, xpos, ypos):
     front.y = math.sin(glm.radians(pitch))
     front.z = math.sin(glm.radians(yaw)) * math.cos(glm.radians(pitch))
     cameraFront = glm.normalize(front)
-
-
     
 glfw.set_key_callback(window,key_event)
 glfw.set_cursor_pos_callback(window, mouse_event)
@@ -561,17 +592,10 @@ def model(angle, r_x, r_y, r_z, t_x, t_y, t_z, s_x, s_y, s_z):
     
     angle = math.radians(angle)
     
-    matrix_transform = glm.mat4(1.0) # instanciando uma matriz identidade
-       
-    # aplicando rotacao
-    matrix_transform = glm.rotate(matrix_transform, angle, glm.vec3(r_x, r_y, r_z))
-        
-  
-    # aplicando translacao
-    matrix_transform = glm.translate(matrix_transform, glm.vec3(t_x, t_y, t_z)) 
-    
-    # aplicando escala
-    matrix_transform = glm.scale(matrix_transform, glm.vec3(s_x, s_y, s_z))
+    matrix_transform = glm.mat4(1.0)                                                # instanciando uma matriz identidade
+    matrix_transform = glm.rotate(matrix_transform, angle, glm.vec3(r_x, r_y, r_z)) # aplicando rotacao
+    matrix_transform = glm.translate(matrix_transform, glm.vec3(t_x, t_y, t_z))     # aplicando translacao
+    matrix_transform = glm.scale(matrix_transform, glm.vec3(s_x, s_y, s_z))         # aplicando escala
     
     matrix_transform = np.array(matrix_transform).T # pegando a transposta da matriz (glm trabalha com ela invertida)
     
@@ -599,7 +623,6 @@ while not glfw.window_should_close(window):
 
     glfw.poll_events() 
     
-    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     
     glClearColor(0.2, 0.2, 0.2, 1.0)
@@ -610,13 +633,28 @@ while not glfw.window_should_close(window):
         glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
 
     # desenha_objeto(vi_sky, qtd_sky, id_sky, angle_sky, r_sky, t_sky, s_sky)                                       # RUIM
-    desenha_objeto(vi_grass, qtd_grass, id_grass, angle_grass, r_grass, t_grass, s_grass)
-    # desenha_objeto(vi_street, qtd_street, id_street, angle_street, r_street, t_street, s_street)
-    # desenha_objeto(vi_birdbath, qtd_birdbath, id_birdbath, angle_birdbath, r_birdbath, t_birdbath, s_birdbath)
-    # desenha_objeto(vi_museum, qtd_museum, id_museum, angle_museum, r_museum, t_museum, s_museum)
-    # desenha_objeto(vi_floor_m, qtd_floor_m, id_floor_m, angle_floor_m, r_floor_m, t_floor_m, s_floor_m)
-    # desenha_objeto(vi_table, qtd_table, id_table, angle_table, r_table, t_table, s_table)
-    # desenha_objeto(vi_duck, qtd_duck, id_duck, angle_duck, r_duck, t_duck, s_duck)                                # RUIM
+    
+    # ÁREA INTERNA
+    desenha_objeto(vi_museum, qtd_museum, id_museum, angle_museum, r_museum, t_museum, s_museum)                                    # MUSEUM
+    desenha_objeto(vi_floor_m, qtd_floor_m, id_floor_m, angle_floor_m, r_floor_m, t_floor_m, s_floor_m)                             # FLOOR (MUSEUM)
+    desenha_objeto(vi_table, qtd_table, id_table, angle_table, r_table, t_table, s_table)                                           # TABLE
+    desenha_objeto(vi_paint_1, qtd_paint_1, id_paint_1, angle_paint_1, r_paint_1, t_paint_1, s_paint_1)                             # PAINT #1
+    desenha_objeto(vi_paint_2, qtd_paint_2, id_paint_2, angle_paint_2, r_paint_2, t_paint_2, s_paint_2)                             # PAINT #2
+    desenha_objeto(vi_allegorie, qtd_allegorie, id_allegorie, angle_allegorie, r_allegorie, t_allegorie, s_allegorie)               # ALLEGOIRE
+    desenha_objeto(vi_maternidade, qtd_maternidade, id_maternidade, angle_maternidade, r_maternidade, t_maternidade, s_maternidade) # MATERNIDADE
+    desenha_objeto(vi_duck, qtd_duck, id_duck, angle_duck, r_duck, t_duck, s_duck)                                              # RUIM
+
+    # ÁREA EXTERNA
+    desenha_objeto(vi_birdbath, qtd_birdbath, id_birdbath, angle_birdbath, r_birdbath, t_birdbath, s_birdbath)      # BIRDBATH
+    desenha_objeto(vi_grass, qtd_grass, id_grass, angle_grass, r_grass, t_grass, s_grass)                           # FLOOR (GRASS)
+    desenha_objeto(vi_street, qtd_street, id_street, angle_street, r_street, t_street, s_street)                    # FLOOR (STREET)
+    desenha_objeto(vi_campfire, qtd_campfire, id_campfire, angle_campfire, r_campfire, t_campfire, s_campfire)      # CAMPFIRE
+    desenha_objeto(vi_seeds, qtd_seeds, id_seeds, angle_seeds, r_seeds, t_seeds, s_seeds)                           # SEEDS
+    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[0], r_apple[0], t_apple[0], s_apple[0])               # APPLE #1
+    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[1], r_apple[1], t_apple[1], s_apple[1])               # APPLE #2
+    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[2], r_apple[2], t_apple[2], s_apple[2])               # APPLE #3
+    desenha_objeto(vi_booth, qtd_booth, id_booth, angle_booth, r_booth, t_booth, s_booth)                           # BOOTH
+    desenha_objeto(vi_car, qtd_car, id_car, angle_car, r_car, t_car, s_car)                                         # HACHIROKU
 
     loc_il1 = glGetUniformLocation(program, "il1")
     glUniform1f(loc_il1, int(internalLight))
