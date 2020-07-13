@@ -14,16 +14,15 @@ from PIL import Image
 
 glfw.init()
 glfw.window_hint(glfw.VISIBLE, glfw.FALSE);
-altura = 1600
-largura = 1200
-window = glfw.create_window(largura, altura, "Iluminação", None, None)
+altura = 1080
+largura = 1920
+window = glfw.create_window(largura, altura, "Trabalho Prático 3", None, None)
 glfw.make_context_current(window)
 
 vertex_code = """
         attribute vec3 position;
         attribute vec2 texture_coord;
         attribute vec3 normals;
-        
        
         varying vec2 out_texture;
         varying vec3 out_fragPos;
@@ -245,7 +244,6 @@ def insert_model(file_name,texture_name):
 
     return vi,(vf-vi),object_id
 
-
 #-----------SKY------------#
 
 angle_sky = 0.0
@@ -253,7 +251,6 @@ r_sky = (0.0, 1.0, 0.0)
 s_sky = (1.0, 1.0, 1.0)
 t_sky = (-s_sky[0] / 2, -s_sky[1] / 2, -s_sky[2] / 2)
 vi_sky, qtd_sky, id_sky = insert_model('modelos/sky/cubo.obj','modelos/sky/sky_modified.png')
-
 
 #---------TERRAIN (GRASS)----------#
 
@@ -617,7 +614,58 @@ def projection():
 glfw.show_window(window)
 glfw.set_cursor_pos(window, lastX, lastY)
 
-glEnable(GL_DEPTH_TEST) ### importante para 3D
+glEnable(GL_DEPTH_TEST) 
+
+# PROPRIEDADES DE ILUMINAÇÃO DOS OBJETOS
+
+#-----------FLOOR (GRASS)----------#
+ka_grass = 1.0
+kd_grass = 0.8
+ks_grass = 0.4
+ns_grass = 32.0
+
+#-----------FLOOR (STREET)---------#
+ka_street = 0.8
+kd_street = 1.0
+ks_street = 0.0
+ns_street = 16.0
+
+#-------------BIRDBATH-------------#
+ka_birdbath = 1.0
+kd_birdbath = 0.6
+ks_birdbath = 0.3
+ns_birdbath = 16.0
+
+#--------------CAMPFIRE------------#
+ka_campfire = 0.8
+kd_campfire = 1.0
+ks_campfire = 0.0
+ns_campfire = 1.0
+
+#---------------SEEDS--------------#
+ka_seeds = 1.0
+kd_seeds = 1.0
+ks_seeds = 0.3
+ns_seeds = 32.0
+
+#---------------APPLE--------------#
+ka_apple = 1.0
+kd_apple = 0.7
+ks_apple = 0.8
+ns_apple = 64.0
+
+#---------------BOOTH--------------#
+ka_booth = 1.0
+kd_booth = 0.7
+ks_booth = 1.0
+ns_booth = 128.0
+
+#-------------HACHIROKU------------#
+ka_car = 1.0
+kd_car = 0.6
+ks_car = 1.0
+ns_car = 128.0
+
     
 while not glfw.window_should_close(window):
 
@@ -632,7 +680,7 @@ while not glfw.window_should_close(window):
     if polygonal_mode==False:
         glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
 
-    # desenha_objeto(vi_sky, qtd_sky, id_sky, angle_sky, r_sky, t_sky, s_sky)                                       # RUIM
+    # desenha_objeto(vi_sky, qtd_sky, id_sky, angle_sky, r_sky, t_sky, s_sky)                                                       # RUIM
     
     # ÁREA INTERNA
     desenha_objeto(vi_museum, qtd_museum, id_museum, angle_museum, r_museum, t_museum, s_museum)                                    # MUSEUM
@@ -642,19 +690,19 @@ while not glfw.window_should_close(window):
     desenha_objeto(vi_paint_2, qtd_paint_2, id_paint_2, angle_paint_2, r_paint_2, t_paint_2, s_paint_2)                             # PAINT #2
     desenha_objeto(vi_allegorie, qtd_allegorie, id_allegorie, angle_allegorie, r_allegorie, t_allegorie, s_allegorie)               # ALLEGOIRE
     desenha_objeto(vi_maternidade, qtd_maternidade, id_maternidade, angle_maternidade, r_maternidade, t_maternidade, s_maternidade) # MATERNIDADE
-    desenha_objeto(vi_duck, qtd_duck, id_duck, angle_duck, r_duck, t_duck, s_duck)                                              # RUIM
+    desenha_objeto(vi_duck, qtd_duck, id_duck, angle_duck, r_duck, t_duck, s_duck)                                                  # RUIM
 
     # ÁREA EXTERNA
-    desenha_objeto(vi_birdbath, qtd_birdbath, id_birdbath, angle_birdbath, r_birdbath, t_birdbath, s_birdbath)      # BIRDBATH
-    desenha_objeto(vi_grass, qtd_grass, id_grass, angle_grass, r_grass, t_grass, s_grass)                           # FLOOR (GRASS)
-    desenha_objeto(vi_street, qtd_street, id_street, angle_street, r_street, t_street, s_street)                    # FLOOR (STREET)
-    desenha_objeto(vi_campfire, qtd_campfire, id_campfire, angle_campfire, r_campfire, t_campfire, s_campfire)      # CAMPFIRE
-    desenha_objeto(vi_seeds, qtd_seeds, id_seeds, angle_seeds, r_seeds, t_seeds, s_seeds)                           # SEEDS
-    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[0], r_apple[0], t_apple[0], s_apple[0])               # APPLE #1
-    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[1], r_apple[1], t_apple[1], s_apple[1])               # APPLE #2
-    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[2], r_apple[2], t_apple[2], s_apple[2])               # APPLE #3
-    desenha_objeto(vi_booth, qtd_booth, id_booth, angle_booth, r_booth, t_booth, s_booth)                           # BOOTH
-    desenha_objeto(vi_car, qtd_car, id_car, angle_car, r_car, t_car, s_car)                                         # HACHIROKU
+    desenha_objeto(vi_birdbath, qtd_birdbath, id_birdbath, angle_birdbath, r_birdbath, t_birdbath, s_birdbath, ka_birdbath, kd_birdbath, ks_birdbath, ns_birdbath)  # BIRDBATH
+    desenha_objeto(vi_grass, qtd_grass, id_grass, angle_grass, r_grass, t_grass, s_grass, ka_grass, kd_grass, ks_grass, ns_grass)                                   # FLOOR (GRASS)
+    desenha_objeto(vi_street, qtd_street, id_street, angle_street, r_street, t_street, s_street,ka_street, kd_street, ks_street,ns_street)                          # FLOOR (STREET)
+    desenha_objeto(vi_campfire, qtd_campfire, id_campfire, angle_campfire, r_campfire, t_campfire, s_campfire, ka_campfire, kd_campfire, ks_campfire, ns_campfire)  # CAMPFIRE
+    desenha_objeto(vi_seeds, qtd_seeds, id_seeds, angle_seeds, r_seeds, t_seeds, s_seeds, ka_seeds, kd_seeds, ks_seeds, ns_seeds)                                   # SEEDS
+    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[0], r_apple[0], t_apple[0], s_apple[0], ka_apple, kd_apple, ks_apple, ns_apple)                       # APPLE #1
+    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[1], r_apple[1], t_apple[1], s_apple[1], ka_apple, kd_apple, ks_apple, ns_apple)                       # APPLE #2
+    desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[2], r_apple[2], t_apple[2], s_apple[2], ka_apple, kd_apple, ks_apple, ns_apple)                       # APPLE #3
+    desenha_objeto(vi_booth, qtd_booth, id_booth, angle_booth, r_booth, t_booth, s_booth, ka_booth, kd_booth, ks_booth, ns_booth)                                   # BOOTH
+    desenha_objeto(vi_car, qtd_car, id_car, angle_car, r_car, t_car, s_car, ka_car, kd_car, ks_car, ns_car)                                                         # HACHIROKU
 
     loc_il1 = glGetUniformLocation(program, "il1")
     glUniform1f(loc_il1, int(internalLight))
