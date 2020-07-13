@@ -380,6 +380,15 @@ t_booth = (-16.0, -1.0, 12.0)
 s_booth = (2.0,2.0,2.0)
 vi_booth, qtd_booth, id_booth = insert_model('modelos/booth/booth.obj','modelos/booth/booth.jpg')
 
+
+#-------------EAGLE-------------#
+
+angle_eagle = 0.0
+r_eagle = (0.0,1.0,0.0)
+t_eagle = (3.0,7.0,0.0)
+s_eagle = (1.0,1.0,1.0)
+vi_eagle, qtd_eagle, id_eagle = insert_model('modelos/eagle/eagle.obj','modelos/eagle/eagle.png')
+
 #-------POKEBALL-------#
 
 angle_pokeball = 0.0
@@ -453,6 +462,43 @@ def desenha_objeto(vi, qtd, texture_id, angle, rotation, translation, scale, ka 
 
     glBindTexture(GL_TEXTURE_2D, texture_id)
     glDrawArrays(GL_TRIANGLES, vi, qtd)
+
+def desenha_objeto_rotacao(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 1, kd = 1, ks = 1, ns = 4096, invert_normal = False):
+
+    global vertices
+
+    angle = math.radians(angle)
+
+    # aplica a matriz model
+    mat_model = glm.mat4(1.0)                                                                # instanciando uma matriz identidade
+    mat_model = glm.translate(mat_model, glm.vec3(-translation[0], 0.0, -translation[2]))    # aplicando translacao para a origem
+    mat_model = glm.rotate(mat_model, angle, glm.vec3(*rotation))                            # aplicando rotacao 
+    mat_model = glm.translate(mat_model, glm.vec3(*translation))                             # aplicando translacao de volta ao ponto original
+       
+    mat_model = glm.scale(mat_model, glm.vec3(*scale))                  # aplicando escala
+    mat_model = np.array(mat_model).T                                   # pegando a transposta da matriz (glm trabalha com ela invertida)
+
+    loc_model = glGetUniformLocation(program, "model")
+    glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model) 
+
+    loc_ka = glGetUniformLocation(program, "ka")
+    glUniform1f(loc_ka, ka)                      
+    
+    loc_kd = glGetUniformLocation(program, "kd")
+    glUniform1f(loc_kd, kd)    
+
+    loc_ks = glGetUniformLocation(program, "ks")
+    glUniform1f(loc_ks, ks)       
+    
+    loc_ns = glGetUniformLocation(program, "ns")
+    glUniform1f(loc_ns, ns)
+
+    # define o id da textura do modelo
+    glBindTexture(GL_TEXTURE_2D, texture_id)
+
+    # desenha o objeto 
+    glDrawArrays(GL_TRIANGLES, vi, qtd)
+
 
 def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0, kd = 1, ks = 0, ns = 1, invert_normal = True):
     mat_model = model(angle, *rotation, *translation, *scale)
@@ -630,10 +676,16 @@ kd_street = 1.0
 ks_street = 0.0
 ns_street = 16.0
 
+#---------------EAGLE--------------#
+ka_eagle = 0.9
+kd_eagle = 0.9
+ks_eagle = 0.1
+ns_eagle = 16.0
+
 #-------------BIRDBATH-------------#
 ka_birdbath = 1.0
 kd_birdbath = 0.6
-ks_birdbath = 0.3
+ks_birdbath = 0.4
 ns_birdbath = 16.0
 
 #--------------CAMPFIRE------------#
@@ -665,7 +717,6 @@ ka_car = 1.0
 kd_car = 0.6
 ks_car = 1.0
 ns_car = 128.0
-
     
 while not glfw.window_should_close(window):
 
@@ -693,6 +744,7 @@ while not glfw.window_should_close(window):
     desenha_objeto(vi_duck, qtd_duck, id_duck, angle_duck, r_duck, t_duck, s_duck)                                                  # RUIM
 
     # ÁREA EXTERNA
+    desenha_objeto_rotacao(vi_eagle, qtd_eagle, id_eagle, angle_eagle, r_eagle, t_eagle, s_eagle, ka_eagle, kd_eagle, ks_eagle, ns_eagle)                           # EAGLE
     desenha_objeto(vi_birdbath, qtd_birdbath, id_birdbath, angle_birdbath, r_birdbath, t_birdbath, s_birdbath, ka_birdbath, kd_birdbath, ks_birdbath, ns_birdbath)  # BIRDBATH
     desenha_objeto(vi_grass, qtd_grass, id_grass, angle_grass, r_grass, t_grass, s_grass, ka_grass, kd_grass, ks_grass, ns_grass)                                   # FLOOR (GRASS)
     desenha_objeto(vi_street, qtd_street, id_street, angle_street, r_street, t_street, s_street,ka_street, kd_street, ks_street,ns_street)                          # FLOOR (STREET)
@@ -709,7 +761,11 @@ while not glfw.window_should_close(window):
     desenha_luz1(vi_pokeball, qtd_pokeball, id_pokeball, angle_pokeball, r_pokeball, t_pokeball, s_pokeball)
 
     desenha_luz2(vi_sun, qtd_sun, id_sun, angle_sun, r_sun, t_sun, s_sun)
-    angle_sun += 1
+
+    angle_sun += 1.0
+    angle_eagle -= 1.0
+
+    if angle_eagle == -360.0: angle_eagle = 0.0
     
     mat_view = view()
     loc_view = glGetUniformLocation(program, "view")
