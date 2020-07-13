@@ -559,10 +559,11 @@ def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 
 
     nova_coordenada_luz = glm.mat4(1.0)
     nova_coordenada_luz = glm.rotate(nova_coordenada_luz, math.radians(angle), glm.vec3(*rotation))
-    nova_coordenada_luz = nova_coordenada_luz * glm.vec4(*translation, 1.0)
+    nova_coordenada_luz = glm.translate(nova_coordenada_luz, glm.vec3(*translation))     # aplicando translacao
+    nova_coordenada_luz = nova_coordenada_luz * glm.vec4(0, 0, 0, 1.0)
 
     loc_light_pos = glGetUniformLocation(program, "lightPos1")
-    glUniform3f(loc_light_pos, *translation)
+    glUniform3f(loc_light_pos, nova_coordenada_luz[0], nova_coordenada_luz[1], nova_coordenada_luz[2])
 
     glBindTexture(GL_TEXTURE_2D, texture_id)
     glDrawArrays(GL_TRIANGLES, vi, qtd)
@@ -713,7 +714,7 @@ glEnable(GL_DEPTH_TEST)
 
 #---------------MUSEUM-------------#
 ka_museum = 0.7
-kd_museum = 0.5
+kd_museum = 0.0
 ks_museum = 0.0
 ns_museum = 1.0
 il1_museum = 0.0
@@ -721,7 +722,7 @@ il2_museum = 1.0
 
 #----------FLOOR (MUSEUM)----------#
 ka_floor_m = 0.6
-kd_floor_m = 0.6
+kd_floor_m = 1.0
 ks_floor_m = 0.3
 ns_floor_m = 4.0
 il1_floor_m = 1.0
