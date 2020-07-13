@@ -249,8 +249,8 @@ def insert_model(file_name,texture_name):
 
 angle_sky = 0.0
 r_sky = (0.0, 1.0, 0.0)
-s_sky = (1.0, 1.0, 1.0)
-t_sky = (-s_sky[0] / 2, -s_sky[1] / 2, -s_sky[2] / 2)
+t_sky = [-3.0, 10.0, 5.0]                                                                 
+s_sky = [20.0, 20.0, 20.0] 
 vi_sky, qtd_sky, id_sky = insert_model('modelos/sky/cubo.obj','modelos/sky/sky_modified.png')
 
 #---------TERRAIN (GRASS)----------#
@@ -871,6 +871,14 @@ ks_car = 1.0
 ns_car = 128.0
 il1_car = 0.0
 il2_car = 1.0
+
+#---------------SKY----------------#
+ka_sky = 1.0
+kd_sky = 0.0
+ks_sky = 0.0
+ns_sky = 1.0
+il1_sky = 0.0
+il2_sky = 1.0
     
 while not glfw.window_should_close(window):
 
@@ -885,7 +893,7 @@ while not glfw.window_should_close(window):
     if polygonal_mode==False:
         glPolygonMode(GL_FRONT_AND_BACK,GL_FILL)
 
-    # desenha_objeto(vi_sky, qtd_sky, id_sky, angle_sky, r_sky, t_sky, s_sky)                                                       # RUIM
+    desenha_objeto(vi_sky, qtd_sky, id_sky, angle_sky, r_sky, t_sky, s_sky, ka_sky, kd_sky, ks_sky, ns_sky, il1_sky, il2_sky) # SKY
     
     # ÁREA INTERNA
     desenha_objeto(vi_museum, qtd_museum, id_museum, angle_museum, r_museum, t_museum, s_museum, ka_museum, kd_museum, ks_museum, ns_museum, il1_museum, il2_museum)                                                                 # MUSEUM
