@@ -372,6 +372,14 @@ t_car = (-16.0, -1.0, 16.2)
 s_car = (1.2,1.2,1.2)
 vi_car, qtd_car, id_car = insert_model('modelos/hachiroku/hachiroku.obj','modelos/hachiroku/hachiroku.jpg')
 
+#-------------SOCCER BALL-------------#
+
+angle_ball = 0.0
+r_ball = (0.0, 0.0, 1.0)
+t_ball = (-15.0, -0.75, 5.0)
+s_ball = (0.03,0.03,0.03)
+vi_ball, qtd_ball, id_ball = insert_model('modelos/soccer_ball/soccer_ball.obj','modelos/soccer_ball/soccer_ball.jpg')
+
 #-------------BOOTH-------------#
 
 angle_booth = 0.0
@@ -380,6 +388,13 @@ t_booth = (-16.0, -1.0, 12.0)
 s_booth = (2.0,2.0,2.0)
 vi_booth, qtd_booth, id_booth = insert_model('modelos/booth/booth.obj','modelos/booth/booth.jpg')
 
+#-------------HYDRANT------------#
+
+angle_hydrant = 0.0
+r_hydrant = (0.0, 0.0, 1.0)
+t_hydrant = (-10.0, -1.0, 13.0)
+s_hydrant = (0.01,0.01,0.01)
+vi_hydrant, qtd_hydrant, id_hydrant = insert_model('modelos/hydrant/hydrant.obj','modelos/hydrant/hydrant.jpg')
 
 #-------------EAGLE-------------#
 
@@ -389,11 +404,19 @@ t_eagle = (3.0,7.0,0.0)
 s_eagle = (1.0,1.0,1.0)
 vi_eagle, qtd_eagle, id_eagle = insert_model('modelos/eagle/eagle.obj','modelos/eagle/eagle.png')
 
-#-------POKEBALL-------#
+#-------------OAK---------------#
 
-angle_pokeball = 0.0
+angle_oak = 0.0
+r_oak = (0.0,1.0,0.0)
+t_oak = (6.0, -1.0, -4.0)
+s_oak = (0.06,0.06,0.06)
+vi_oak, qtd_oak, id_oak = insert_model('modelos/tree/oak.obj','modelos/tree/oak.jpg')
+
+#----------POKEBALL---------#
+
+angle_pokeball = -90.0
 r_pokeball = (0.0, 1.0, 0.0)
-t_pokeball = (0.8,0.5,0.5)
+t_pokeball = (0.8,0.05,-0.6)
 s_pokeball = (0.03,0.03,0.03)
 vi_pokeball, qtd_pokeball, id_pokeball = insert_model('modelos/table/pokeball.obj','modelos/table/pokeball.png')
 
@@ -401,7 +424,7 @@ vi_pokeball, qtd_pokeball, id_pokeball = insert_model('modelos/table/pokeball.ob
 
 angle_sun = 0.0
 r_sun = (0.0,0.0,1.0)
-t_sun = (1.0, 10.0, 0.0)
+t_sun = (14.0, 14.0, 0.0)
 s_sun = (1.0,1.0,1.0)
 vi_sun, qtd_sun, id_sun = insert_model('modelos/light/sun_modified.obj','modelos/light/sun.jpg') 
 
@@ -500,7 +523,7 @@ def desenha_objeto_rotacao(vi, qtd, texture_id, angle, rotation, translation, sc
     glDrawArrays(GL_TRIANGLES, vi, qtd)
 
 
-def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0, kd = 1, ks = 0, ns = 1, invert_normal = True):
+def desenha_luz1(vi, qtd, texture_id, angle, rotation, translation, scale, ka = 0.5, kd = 1, ks = 0, ns = 1, invert_normal = True):
     mat_model = model(angle, *rotation, *translation, *scale)
     loc_model = glGetUniformLocation(program, "model")
     glUniformMatrix4fv(loc_model, 1, GL_TRUE, mat_model)
@@ -664,6 +687,54 @@ glEnable(GL_DEPTH_TEST)
 
 # PROPRIEDADES DE ILUMINAÇÃO DOS OBJETOS
 
+#---------------MUSEUM-------------#
+ka_museum = 0.7
+kd_museum = 0.5
+ks_museum = 0.0
+ns_museum = 1.0
+
+#----------FLOOR (MUSEUM)----------#
+ka_floor_m = 0.6
+kd_floor_m = 0.6
+ks_floor_m = 0.3
+ns_floor_m = 4.0
+
+#---------------TABLE--------------#
+ka_table = 0.7
+kd_table = 0.5
+ks_table = 0.0
+ns_table = 1.0
+
+#---------------DUCK---------------#
+ka_duck = 0.8
+kd_duck = 0.5
+ks_duck = 0.0
+ns_duck = 1.0
+
+#------MATERNIDADE SCULPTURE-------#
+ka_maternidade = 1.0
+kd_maternidade = 0.5
+ks_maternidade = 1.0
+ns_maternidade = 256.0
+
+#-------ALLEGORIE SCULPTURE--------#
+ka_allegorie = 1.0
+kd_allegorie = 0.5
+ks_allegorie = 1.0
+ns_allegorie = 256.0
+
+#--------------PAINT #1------------#
+ka_paint1 = 0.8
+kd_paint1 = 0.4
+ks_paint1 = 0.1
+ns_paint1 = 8.0
+
+#-------------PAINT #2-------------#
+ka_paint2 = 0.8
+kd_paint2 = 0.4
+ks_paint2 = 0.1
+ns_paint2 = 8.0
+
 #-----------FLOOR (GRASS)----------#
 ka_grass = 1.0
 kd_grass = 0.8
@@ -677,10 +748,10 @@ ks_street = 0.0
 ns_street = 16.0
 
 #---------------EAGLE--------------#
-ka_eagle = 0.9
+ka_eagle = 0.8
 kd_eagle = 0.9
-ks_eagle = 0.1
-ns_eagle = 16.0
+ks_eagle = 0.0
+ns_eagle = 1.0
 
 #-------------BIRDBATH-------------#
 ka_birdbath = 1.0
@@ -706,11 +777,29 @@ kd_apple = 0.7
 ks_apple = 0.8
 ns_apple = 64.0
 
+#----------------OAK---------------#
+ka_oak = 1.0
+kd_oak = 0.6
+ks_oak = 0.0
+ns_oak = 1.0
+
 #---------------BOOTH--------------#
 ka_booth = 1.0
 kd_booth = 0.7
 ks_booth = 1.0
 ns_booth = 128.0
+
+#------------SOCCER BALL------------#
+ka_ball = 0.6
+kd_ball = 0.6
+ks_ball = 0.3
+ns_ball = 128.0
+
+#--------------HYDRANT-------------#
+ka_hydrant = 1.0
+kd_hydrant = 0.5
+ks_hydrant = 1.0
+ns_hydrant = 64.0
 
 #-------------HACHIROKU------------#
 ka_car = 1.0
@@ -734,14 +823,14 @@ while not glfw.window_should_close(window):
     # desenha_objeto(vi_sky, qtd_sky, id_sky, angle_sky, r_sky, t_sky, s_sky)                                                       # RUIM
     
     # ÁREA INTERNA
-    desenha_objeto(vi_museum, qtd_museum, id_museum, angle_museum, r_museum, t_museum, s_museum)                                    # MUSEUM
-    desenha_objeto(vi_floor_m, qtd_floor_m, id_floor_m, angle_floor_m, r_floor_m, t_floor_m, s_floor_m)                             # FLOOR (MUSEUM)
-    desenha_objeto(vi_table, qtd_table, id_table, angle_table, r_table, t_table, s_table)                                           # TABLE
-    desenha_objeto(vi_paint_1, qtd_paint_1, id_paint_1, angle_paint_1, r_paint_1, t_paint_1, s_paint_1)                             # PAINT #1
-    desenha_objeto(vi_paint_2, qtd_paint_2, id_paint_2, angle_paint_2, r_paint_2, t_paint_2, s_paint_2)                             # PAINT #2
-    desenha_objeto(vi_allegorie, qtd_allegorie, id_allegorie, angle_allegorie, r_allegorie, t_allegorie, s_allegorie)               # ALLEGOIRE
-    desenha_objeto(vi_maternidade, qtd_maternidade, id_maternidade, angle_maternidade, r_maternidade, t_maternidade, s_maternidade) # MATERNIDADE
-    desenha_objeto(vi_duck, qtd_duck, id_duck, angle_duck, r_duck, t_duck, s_duck)                                                  # RUIM
+    desenha_objeto(vi_museum, qtd_museum, id_museum, angle_museum, r_museum, t_museum, s_museum, ka_museum, kd_museum, ks_museum, ns_museum)                                                       # MUSEUM
+    desenha_objeto(vi_floor_m, qtd_floor_m, id_floor_m, angle_floor_m, r_floor_m, t_floor_m, s_floor_m, ka_floor_m, kd_floor_m, ks_floor_m, ns_floor_m)                                            # FLOOR (MUSEUM)
+    desenha_objeto(vi_table, qtd_table, id_table, angle_table, r_table, t_table, s_table, ka_table, kd_table, ks_table, ns_table)                                                                  # TABLE
+    desenha_objeto(vi_paint_1, qtd_paint_1, id_paint_1, angle_paint_1, r_paint_1, t_paint_1, s_paint_1, ka_paint1, kd_paint1, ks_paint1, ns_paint1)                                                # PAINT #1
+    desenha_objeto(vi_paint_2, qtd_paint_2, id_paint_2, angle_paint_2, r_paint_2, t_paint_2, s_paint_2, ka_paint2, kd_paint2, ks_paint2, ns_paint2)                                                # PAINT #2
+    desenha_objeto(vi_allegorie, qtd_allegorie, id_allegorie, angle_allegorie, r_allegorie, t_allegorie, s_allegorie, ka_allegorie, kd_allegorie, ks_allegorie, ns_allegorie)                      # ALLEGOIRE
+    desenha_objeto(vi_maternidade, qtd_maternidade, id_maternidade, angle_maternidade, r_maternidade, t_maternidade, s_maternidade, ka_maternidade,kd_maternidade, ks_maternidade, ns_maternidade) # MATERNIDADE
+    desenha_objeto(vi_duck, qtd_duck, id_duck, angle_duck, r_duck, t_duck, s_duck, ka_duck, kd_duck, ks_duck, ns_duck)                                                                             # DUCK
 
     # ÁREA EXTERNA
     desenha_objeto_rotacao(vi_eagle, qtd_eagle, id_eagle, angle_eagle, r_eagle, t_eagle, s_eagle, ka_eagle, kd_eagle, ks_eagle, ns_eagle)                           # EAGLE
@@ -753,8 +842,11 @@ while not glfw.window_should_close(window):
     desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[0], r_apple[0], t_apple[0], s_apple[0], ka_apple, kd_apple, ks_apple, ns_apple)                       # APPLE #1
     desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[1], r_apple[1], t_apple[1], s_apple[1], ka_apple, kd_apple, ks_apple, ns_apple)                       # APPLE #2
     desenha_objeto(vi_apple, qtd_apple, id_apple, angle_apple[2], r_apple[2], t_apple[2], s_apple[2], ka_apple, kd_apple, ks_apple, ns_apple)                       # APPLE #3
+    desenha_objeto(vi_oak, qtd_oak, id_oak, angle_oak, r_oak, t_oak, s_oak, ka_oak, kd_oak, ks_oak, ns_oak)                                                         # OAK
     desenha_objeto(vi_booth, qtd_booth, id_booth, angle_booth, r_booth, t_booth, s_booth, ka_booth, kd_booth, ks_booth, ns_booth)                                   # BOOTH
+    desenha_objeto(vi_hydrant, qtd_hydrant, id_hydrant, angle_hydrant, r_hydrant, t_hydrant, s_hydrant, ka_hydrant, kd_hydrant, ks_hydrant, ns_hydrant)             # HYDRANT   
     desenha_objeto(vi_car, qtd_car, id_car, angle_car, r_car, t_car, s_car, ka_car, kd_car, ks_car, ns_car)                                                         # HACHIROKU
+    desenha_objeto(vi_ball, qtd_ball, id_ball, angle_ball, r_ball, t_ball, s_ball, ka_ball, kd_ball, ks_ball, ns_ball)                                              # SOCCER BALL
 
     loc_il1 = glGetUniformLocation(program, "il1")
     glUniform1f(loc_il1, int(internalLight))
